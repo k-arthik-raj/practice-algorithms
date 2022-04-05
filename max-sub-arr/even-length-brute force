@@ -1,0 +1,45 @@
+#include <iostream>
+#include<vector>
+#include<climits>
+using namespace std;
+vector<int> max_sum(int arr[], int n)
+{
+    int sum=0,max=INT_MIN,len=0;
+    vector<int> final_max;
+    for(int i = 0;i <n; i++)
+    {
+        for(int j = 1;j<=arr[i];j++)
+        {
+            sum=0;
+            for(int k=j;k<=arr[i];k++)
+            {
+                sum+=k;
+                if(sum > max && sum%2==0)
+                {
+                    max=sum;
+                    len = k-j+1;
+                }
+            }
+        }
+        
+        final_max.push_back(len);
+        max=INT_MIN;
+    }
+    return final_max;
+}
+
+int main() {
+    int a,n;
+    cin>>n;
+    int arr[n];
+    vector<int> arr1;
+    for(int i=0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+    
+    arr1 = max_sum(arr,n);
+    for(auto i = arr1.begin();i != arr1.end();i++)
+        cout<<*i<<" ";
+	return 0;
+}
