@@ -1,0 +1,43 @@
+#include<iostream>
+using namespace std;
+void rabin_karp(char txt[],int m,char pat[],int n)
+{
+    int hash=0,hasht=0,k=0;
+    for(int i=0;i<n;i++)
+    {
+        char a = pat[i];
+        if(islower(a))
+            hash+=((int)a)%96;
+        else
+            hash+=((int)a)%64;
+    }
+    for(int i=0;i<n;i++)
+    {
+        for(int j=i;j<n;j++)
+        {
+            if(islower(txt[j]))
+                hash+=((int)txt[j])%96;
+            else
+                hash+=((int)txt[j])%64;
+        }
+        if(hasht==hash)
+            cout<<"Pattern found at index "<<i<<endl;
+        hasht=0;
+    }
+}
+int main()
+{
+    int m,n;
+    cout<<"Enter the number of elements in  text and pattern\n";
+    cin>>m>>n;
+    char txt[m],pat[n];
+    cout<<"Enter the text";
+    for(int i=0;i<m;i++)
+        cin>>txt[i];
+
+    cout<<"Enter the pattern";
+    for(int i=0;i<m;i++)
+        cin>>pat[i];
+
+    rabin_karp(txt,m,pat,n);
+}
